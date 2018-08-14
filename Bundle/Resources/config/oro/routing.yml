@@ -1,0 +1,9 @@
+oro_twig_inspector_template_link:
+    path:     /_template/{template}
+    requirements:
+        template: ".+"
+    defaults:
+        _controller: oro_twig_inspector.controller.open_template
+        line: 1
+    options:
+        frontend: true

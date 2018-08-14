@@ -1,0 +1,11 @@
+framework:
+    ide: phpstorm
+
+security:
+    firewalls:
+        twig_inspector:
+            pattern:   ^/_template/
+            security: false
+
+oro_twig_inspector:
+    base_dir: "%kernel.project_dir%/../../"

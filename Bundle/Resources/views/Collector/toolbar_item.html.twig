@@ -1,0 +1,8 @@
+<div id="_twig_inspector__icon"
+     class="sf-toolbar-block sf-toolbar-block-{{ name }}
+    {%- if isActive %} sf-toolbar-status-yellow{% else %}sf-toolbar-status-normal{% endif %}
+    {{ additional_classes|default('') }}" {{ block_attrs|default('')|raw -}}
+>
+    <div class="sf-toolbar-icon">{{ icon }}</div>
+    <div class="sf-toolbar-info">{{ text }}</div>
+</div>

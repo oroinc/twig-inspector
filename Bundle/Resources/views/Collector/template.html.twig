@@ -1,0 +1,22 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set isActive = app.request.cookies.getBoolean('twig_inspector_is_active', false) %}
+    {% set icon %}
+        <span class="icon">&lt;/&gt;</span>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>Twig Inspector</b>
+            <span></span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <input type="checkbox" id="_twig_inspector__status"{% if isActive %} checked{% endif %}>
+            <label for="_twig_inspector__status"><span>enable (will reload the page)</span></label>
+        </div>
+    {% endset %}
+    {{ include('@OroTwigInspector/Collector/toolbar_item.html.twig') }}
+    <script>{{ include('@OroTwigInspector/assets/dist/index.min.js') }}</script>
+    <style>{{ include('@OroTwigInspector/assets/dist/style.min.css') }}</style>
+{% endblock %}

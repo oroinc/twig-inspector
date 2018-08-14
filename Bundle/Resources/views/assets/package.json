@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-csso": "latest",
+    "gulp-rename": "latest",
+    "gulp-uglify": "latest"
+  }
+}

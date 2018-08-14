@@ -1,0 +1,45 @@
+services:
+    _defaults:
+        public: false
+
+    oro_twig_inspector.controller.open_template:
+        class: Oro\TwigInspector\Controller\OpenTemplateController
+        arguments:
+            - '@twig'
+            - '@oro_twig_inspector.file_link_formatter'
+        public: true
+
+    oro_twig_inspector.box_drawings:
+        class: Oro\TwigInspector\BoxDrawings
+
+    oro_twig_inspector.twig.twig_inspector_extension:
+        class: Oro\TwigInspector\Twig\TwigInspectorExtension
+        tags:
+            - { name: twig.extension }
+
+    oro_twig_inspector.twig.html_comments_extension:
+        class: Oro\TwigInspector\Twig\HtmlCommentsExtension
+        arguments:
+            - '@request_stack'
+            - '@router'
+            - '@oro_twig_inspector.box_drawings'
+        tags:
+            - { name: twig.extension }
+
+    oro_twig_inspector.file_link_formatter:
+        class: Symfony\Component\HttpKernel\Debug\FileLinkFormatter
+        arguments:
+            - "%debug.file_link_format%"
+            - "@request_stack"
+            - "%oro_twig_inspector.base_dir%"
+            - "/_profiler/open?file=%%f&amp;line=%%l#line%%l"
+
+    oro_twig_inspector.data_collector:
+        class: Oro\TwigInspector\DataCollector\TwigInspectorCollector
+        tags:
+            -
+                name:     data_collector
+                template: '@OroTwigInspector/Collector/template.html.twig'
+                id:       'twig_inspector'
+                # just before symfony twig collector
+                priority: 260
