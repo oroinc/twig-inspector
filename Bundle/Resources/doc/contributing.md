@@ -1,8 +1,8 @@
 # Contributing 
-If you are improving JS at this package, it's required to update minified version before the commit.
+If you are improving JS in this package, updating minified version before the commit is required.
 
-While working at `./Bundle/Resources/views/assets/`, 
-to update minified versions at `dist/` folder after modifying files in `src/` run: 
+After modifying the files in `./Bundle/Resources/views/assets/src/`, run the command below 
+to update the minified versions in the `./Bundle/Resources/views/assets/dist/` folder : 
 ```
 npm install
 gulp

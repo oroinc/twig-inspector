@@ -1,17 +1,17 @@
 # Oro Twig Inspector
 
-Oro Twig Inspector adds possibility to find twig templates and blocks used for rendering HTML pages faster during development.
+Oro Twig Inspector adds the possibility to find twig templates and blocks used for rendering HTML pages faster during development.
 
 Documentation
 -------------
-[Read the Documentation for master](./Bundle/Resources/doc/usage.md)
+[Read the Documentation for master](./Bundle/Resources/doc/usage.md).
 
 Installation
 ------------
 
-[Read an installation instruction](./Bundle/Resources/doc/installation.md).
+[Read the installation instruction](./Bundle/Resources/doc/installation.md).
 
 License
 -------
 
-This bundle is under the MIT license. See the complete license [in the bundle](LICENSE)
+This bundle is under the MIT license. See the complete license [in the bundle](LICENSE).

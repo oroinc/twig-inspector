@@ -1,6 +1,8 @@
 {
     "name": "oro/twig-inspector",
-    "description": "Symfony Toolbar extension that allows to inspect twig templates and blocks visually or in source code with comments",
+    "description": "Oro Twig Inspector adds the possibility to find twig templates and blocks used for rendering HTML pages faster during development",
+    "type": "symfony-bundle",
+    "keywords": ["twig", "debug", "inspect", "template", "ORO", "symfony", "toolbar-extension"],
     "homepage": "https://github.com/oroinc/twig-inspector",
     "license": "MIT",
     "authors": [
@@ -10,8 +12,7 @@
         }
     ],
     "autoload": {
-        "psr-4": {"Oro\\TwigInspector\\": ""},
-        "exclude-from-classmap": ["/Tests/"]
+        "psr-4": {"Oro\\TwigInspector\\": ""}
     },
     "require": {
         "symfony/config": "^3.4",
@@ -20,12 +21,6 @@
         "symfony/http-foundation": "^3.4",
         "symfony/routing": "^3.4",
         "twig/twig": "~1.34|~2.4"
-    },
-    "repositories": {
-        "oro": {
-            "type": "composer",
-            "url": "https://packagist.orocrm.com"
-        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
