@@ -2,12 +2,12 @@
 
 namespace Oro\TwigInspector\Twig;
 
-use Twig_Extension;
+use Twig\Extension\AbstractExtension;
 
 /**
- * Register DebugInfoNodeVisitor to add comments to twig templates
+ * Registers DebugInfoNodeVisitor to add comments to twig templates
  */
-class TwigInspectorExtension extends Twig_Extension
+class TwigInspectorExtension extends AbstractExtension
 {
     /**
      * {@inheritDoc}

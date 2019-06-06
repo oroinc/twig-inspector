@@ -2,13 +2,13 @@
 
 namespace Oro\TwigInspector\Twig\Node;
 
-use Twig_Compiler;
-use Twig_Node;
+use Twig\Compiler;
+use Twig\Node\Node;
 
 /**
  * Modify generated Twig template to call the `start` method of HtmlCommentsExtension extension
  */
-class NodeStart extends Twig_Node
+class NodeStart extends Node
 {
     public function __construct($exensionName, $name, $line, $varName)
     {
@@ -19,9 +19,9 @@ class NodeStart extends Twig_Node
     }
 
     /**
-     * @param Twig_Compiler $compiler
+     * @param Compiler $compiler
      */
-    public function compile(Twig_Compiler $compiler)
+    public function compile(Compiler $compiler)
     {
         $compiler
             ->write(sprintf('$%s = $this->env->getExtension(', $this->getAttribute('var_name')))

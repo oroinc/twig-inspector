@@ -2,13 +2,13 @@
 
 namespace Oro\TwigInspector\Twig\Node;
 
-use Twig_Compiler;
-use Twig_Node;
+use Twig\Compiler;
+use Twig\Node\Node;
 
 /**
  * Modify generated Twig template to call the `end` method of HtmlCommentsExtension extension
  */
-class NodeEnd extends Twig_Node
+class NodeEnd extends Node
 {
     /**
      * {@inheritDoc}
@@ -19,9 +19,9 @@ class NodeEnd extends Twig_Node
     }
 
     /**
-     * @param Twig_Compiler $compiler
+     * @param Compiler $compiler
      */
-    public function compile(Twig_Compiler $compiler)
+    public function compile(Compiler $compiler)
     {
         $compiler
             ->write("\n")

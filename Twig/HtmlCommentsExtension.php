@@ -5,12 +5,12 @@ namespace Oro\TwigInspector\Twig;
 use Oro\TwigInspector\BoxDrawings;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Twig_Extension;
+use Twig\Extension\AbstractExtension;
 
 /**
- * Add comments before and after every Twig block and template
+ * Adds comments before and after every Twig block and template
  */
-class HtmlCommentsExtension extends Twig_Extension
+class HtmlCommentsExtension extends AbstractExtension
 {
     protected const ENABLE_FLAG_COOKIE_ID = 'twig_inspector_is_active';
 

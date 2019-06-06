@@ -4,25 +4,25 @@ namespace Oro\TwigInspector\Twig;
 
 use Oro\TwigInspector\Twig\Node\NodeEnd;
 use Oro\TwigInspector\Twig\Node\NodeStart;
-use Twig_BaseNodeVisitor;
-use Twig_Environment;
-use Twig_Node;
-use Twig_Node_Block;
-use Twig_Node_Body;
-use Twig_Node_Module;
+use Twig\Environment;
+use Twig\Node\BlockNode;
+use Twig\Node\BodyNode;
+use Twig\Node\ModuleNode;
+use Twig\Node\Node;
+use Twig\NodeVisitor\AbstractNodeVisitor;
 
 /**
- * Inspired by {@see \Twig_Profiler_NodeVisitor_Profiler}
+ * Inspired by {@see \Twig\Profiler\NodeVisitor\ProfilerNodeVisitor}
  * Modify generated twig template to add comments before and after every block and template
  */
-class DebugInfoNodeVisitor extends Twig_BaseNodeVisitor
+class DebugInfoNodeVisitor extends AbstractNodeVisitor
 {
     protected const EXTENSION_NAME = HtmlCommentsExtension::class;
 
     /**
      * {@inheritdoc}
      */
-    protected function doEnterNode(Twig_Node $node, Twig_Environment $env)
+    protected function doEnterNode(Node $node, Environment $env)
     {
         return $node;
     }
@@ -30,13 +30,13 @@ class DebugInfoNodeVisitor extends Twig_BaseNodeVisitor
     /**
      * {@inheritdoc}
      */
-    protected function doLeaveNode(Twig_Node $node, Twig_Environment $env)
+    protected function doLeaveNode(Node $node, Environment $env)
     {
         $varName = $this->getVarName();
-        if ($node instanceof Twig_Node_Module) {
+        if ($node instanceof ModuleNode) {
             $node->setNode(
                 'display_start',
-                new Twig_Node(
+                new Node(
                     [
                         new NodeStart(
                             self::EXTENSION_NAME,
@@ -50,17 +50,17 @@ class DebugInfoNodeVisitor extends Twig_BaseNodeVisitor
             );
             $node->setNode(
                 'display_end',
-                new Twig_Node(
+                new Node(
                     [
                         new NodeEnd($varName),
                         $node->getNode('display_end'),
                     ]
                 )
             );
-        } elseif ($node instanceof Twig_Node_Block) {
+        } elseif ($node instanceof BlockNode) {
             $node->setNode(
                 'body',
-                new Twig_Node_Body(
+                new BodyNode(
                     [
                         new NodeStart(
                             self::EXTENSION_NAME,
@@ -87,10 +87,10 @@ class DebugInfoNodeVisitor extends Twig_BaseNodeVisitor
     }
 
     /**
-     * @param Twig_Node $node
+     * @param Node $node
      * @return NodeReference
      */
-    protected function getReference(Twig_Node $node): string
+    protected function getReference(Node $node): string
     {
         return new NodeReference($node->getAttribute('name'), $node->getTemplateName(), $node->getTemplateLine());
     }
