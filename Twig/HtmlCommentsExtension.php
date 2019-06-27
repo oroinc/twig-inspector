@@ -3,6 +3,8 @@
 namespace Oro\TwigInspector\Twig;
 
 use Oro\TwigInspector\BoxDrawings;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
@@ -10,9 +12,12 @@ use Twig\Extension\AbstractExtension;
 /**
  * Adds comments before and after every Twig block and template
  */
-class HtmlCommentsExtension extends AbstractExtension
+class HtmlCommentsExtension extends AbstractExtension implements ServiceSubscriberInterface
 {
     protected const ENABLE_FLAG_COOKIE_ID = 'twig_inspector_is_active';
+
+    /** @var ContainerInterface */
+    private $container;
 
     /** @var string */
     private $previousContent;
@@ -20,28 +25,12 @@ class HtmlCommentsExtension extends AbstractExtension
     /** @var int */
     private $nestingLevel = 0;
 
-    /** @var RequestStack */
-    private $requestStack;
-
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
-
-    /** @var BoxDrawings */
-    private $boxDrawings;
-
     /**
-     * @param RequestStack          $requestStack
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param BoxDrawings           $boxDrawings
+     * @param ContainerInterface $container
      */
-    public function __construct(
-        RequestStack $requestStack,
-        UrlGeneratorInterface $urlGenerator,
-        BoxDrawings $boxDrawings
-    ) {
-        $this->requestStack = $requestStack;
-        $this->urlGenerator = $urlGenerator;
-        $this->boxDrawings = $boxDrawings;
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
     }
 
     /**
@@ -67,14 +56,16 @@ class HtmlCommentsExtension extends AbstractExtension
         $content = ob_get_clean();
 
         if ($this->isSupported($content)) {
+            $boxDrawings = $this->container->get('oro_twig_inspector.box_drawings');
+
             if (strpos($content, $this->previousContent) !== false) {
                 if (trim($content) !== trim($this->previousContent)) {
-                    $this->boxDrawings->blockChanged($this->nestingLevel);
+                    $boxDrawings->blockChanged($this->nestingLevel);
                 }
                 $this->nestingLevel++;
             } else {
                 $this->nestingLevel = 0;
-                $this->boxDrawings->blockChanged($this->nestingLevel);
+                $boxDrawings->blockChanged($this->nestingLevel);
             }
 
             $content = $this->getStartComment($ref).$content.$this->getEndComment($ref);
@@ -90,7 +81,8 @@ class HtmlCommentsExtension extends AbstractExtension
      */
     protected function isEnabled(NodeReference $ref): bool
     {
-        $request = $this->requestStack->getCurrentRequest();
+        $request = $this->container->get('request_stack')
+            ->getCurrentRequest();
 
         if (!$request || !$request->cookies->getBoolean(self::ENABLE_FLAG_COOKIE_ID)) {
             return false;
@@ -129,7 +121,8 @@ class HtmlCommentsExtension extends AbstractExtension
      */
     private function getStartComment(NodeReference $ref): string
     {
-        $prefix = $this->boxDrawings->getStartCommentPrefix();
+        $prefix = $this->container->get('oro_twig_inspector.box_drawings')
+            ->getStartCommentPrefix();
 
         return $this->getComment($prefix, $ref);
     }
@@ -140,7 +133,8 @@ class HtmlCommentsExtension extends AbstractExtension
      */
     private function getEndComment(NodeReference $ref): string
     {
-        $prefix = $this->boxDrawings->getEndCommentPrefix();
+        $prefix = $this->container->get('oro_twig_inspector.box_drawings')
+            ->getEndCommentPrefix();
 
         return $this->getComment($prefix, $ref);
     }
@@ -163,12 +157,24 @@ class HtmlCommentsExtension extends AbstractExtension
      */
     protected function getLink(NodeReference $ref): string
     {
-        return $this->urlGenerator->generate(
+        return $this->container->get('router')->generate(
             'oro_twig_inspector_template_link',
             [
                 'template' => $ref->getTemplate(),
                 'line' => $ref->getLine(),
             ]
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedServices()
+    {
+        return [
+            'request_stack' => RequestStack::class,
+            'router' => UrlGeneratorInterface::class,
+            'oro_twig_inspector.box_drawings' => BoxDrawings::class,
+        ];
     }
 }
