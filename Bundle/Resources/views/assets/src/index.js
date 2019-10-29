@@ -1,3 +1,4 @@
+/* eslint no-var: off */
 (function() {
     var sfToolbar = document.getElementsByClassName('sf-toolbar')[0];
 
