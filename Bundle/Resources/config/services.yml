@@ -20,7 +20,9 @@ services:
     oro_twig_inspector.twig.html_comments_extension:
         class: Oro\TwigInspector\Twig\HtmlCommentsExtension
         arguments:
-            - '@oro_platform.twig.service_locator'
+            - '@request_stack'
+            - '@router'
+            - '@oro_twig_inspector.box_drawings'
         tags:
             - { name: twig.extension }
 
