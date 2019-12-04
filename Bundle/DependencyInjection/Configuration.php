@@ -15,8 +15,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('oro_twig_inspector');
+        $treeBuilder = new TreeBuilder('oro_twig_inspector');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
