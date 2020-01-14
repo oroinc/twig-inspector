@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
 use Twig\Environment;
-use Twig\Template;
+use Twig\TemplateWrapper;
 
 /**
  * Open Twig template in an IDE by template name at the the line
@@ -41,8 +41,8 @@ class OpenTemplateController
     {
         $line = $request->query->get('line', 1);
 
-        /** @var Template $template */
-        $template = $this->twig->loadTemplate($template);
+        /** @var TemplateWrapper $template */
+        $template = $this->twig->load($template);
         $file = $template->getSourceContext()->getPath();
 
         $url = $this->fileLinkFormatter->format($file, $line);
