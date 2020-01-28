@@ -67,7 +67,7 @@ class HtmlCommentsExtension extends AbstractExtension
         $content = ob_get_clean();
 
         if ($this->isSupported($content)) {
-            if (strpos($content, $this->previousContent) !== false) {
+            if ((string)$this->previousContent !== '' && strpos($content, $this->previousContent) !== false) {
                 if (trim($content) !== trim($this->previousContent)) {
                     $this->boxDrawings->blockChanged($this->nestingLevel);
                 }

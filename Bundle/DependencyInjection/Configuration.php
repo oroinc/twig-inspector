@@ -16,7 +16,9 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('oro_twig_inspector');
-        $rootNode = $treeBuilder->getRootNode();
+        // BC layer for symfony/config < 4.2
+        $rootNode = method_exists($treeBuilder, 'getRootNode') ?
+            $treeBuilder->getRootNode() : $treeBuilder->root('oro_twig_inspector');
 
         $rootNode
             ->children()
