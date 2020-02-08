@@ -7,6 +7,7 @@ services:
         arguments:
             - '@twig'
             - '@oro_twig_inspector.file_link_formatter'
+            - '%kernel.project_dir%'
         public: true
 
     oro_twig_inspector.box_drawings:
