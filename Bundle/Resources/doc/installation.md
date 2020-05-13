@@ -23,18 +23,7 @@ public function registerBundles()
 }
 ```
 
-3. Update the application configuration:
-```yaml
-# app/config/config_dev.yml
-framework:
-    ide: phpstorm # to open files in a PhpStorm IDE
-
-# Set the base directory, where from files can be opened by twig inspector, 
-# useful if you use some files from the outside of project root.
- oro_twig_inspector:
-     base_dir: "%kernel.project_dir%/"
-```
-4. Add `twig_inspector` firewall to`security.yml`:
+3. Add `twig_inspector` firewall to`security.yml`:
 ```yaml
 # app/config/security.yml
 security:
@@ -43,15 +32,23 @@ security:
             pattern:   ^/_template/
             security: false
 ```
-5. import the routing to `routing_dev.yml`:
+4. Import the routing to `routing_dev.yml`:
 ```yaml
 # config/routing_dev.yml
 oro_twig_inspector:
     resource: "@OroTwigInspectorBundle/Resources/config/oro/routing.yml"
 ```
+
+5. (Optional) Update the [framework.ide](https://symfony.com/doc/current/reference/configuration/framework.html#ide) configuration, for example:
+```yaml
+# app/config/config_dev.yml
+framework:
+    ide: phpstorm # to open files in a PhpStorm IDE
+```
+
 6. Warm up the cache
 ```bash
 php bin/console cache:warmup --env=dev
 ```
-# Next Step
-[Read the Documentation for master](./usage.md)
+## Next Step
+[How to Use Twig Inspector?](./usage.md)

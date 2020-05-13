@@ -1,4 +1,4 @@
-# Documentation
+# How to Use Twig Inspector?
 
 ## Inspect with built-in Dev Tools in a Browser
 The bundle adds HTML comments to the source of rendered HTML at the start and the end of Twig blocks and templates:<br/>
