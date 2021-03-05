@@ -87,15 +87,6 @@ class DebugInfoNodeVisitor extends AbstractNodeVisitor
     }
 
     /**
-     * @param Node $node
-     * @return NodeReference
-     */
-    protected function getReference(Node $node): string
-    {
-        return new NodeReference($node->getAttribute('name'), $node->getTemplateName(), $node->getTemplateLine());
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getPriority()
