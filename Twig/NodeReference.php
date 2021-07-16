@@ -19,11 +19,6 @@ class NodeReference
     /** @var string */
     private $id;
 
-    /**
-     * @param string $name
-     * @param string $template
-     * @param int    $line
-     */
     public function __construct(string $name, string $template, int $line)
     {
         $this->id = uniqid('', false);
@@ -32,33 +27,21 @@ class NodeReference
         $this->line = $line;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getTemplate(): string
     {
         return $this->template;
     }
 
-    /**
-     * @return int
-     */
     public function getLine(): int
     {
         return $this->line;

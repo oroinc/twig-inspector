@@ -18,9 +18,6 @@ class NodeEnd extends Node
         parent::__construct([], ['var_name' => $varName]);
     }
 
-    /**
-     * @param Compiler $compiler
-     */
     public function compile(Compiler $compiler)
     {
         $compiler

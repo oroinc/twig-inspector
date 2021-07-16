@@ -19,10 +19,6 @@ class OpenTemplateController
     /** @var FileLinkFormatter */
     private $fileLinkFormatter;
 
-    /**
-     * @param Environment       $twig
-     * @param FileLinkFormatter $fileLinkFormatter
-     */
     public function __construct(Environment $twig, FileLinkFormatter $fileLinkFormatter)
     {
         $this->twig = $twig;

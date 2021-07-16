@@ -20,9 +20,6 @@ class BoxDrawings
     /** @var int */
     private $length = 0;
 
-    /**
-     * @return string
-     */
     public function getStartCommentPrefix(): string
     {
         $prefix = $this->getCharset()[0];
@@ -31,9 +28,6 @@ class BoxDrawings
         return $prefix;
     }
 
-    /**
-     * @return string
-     */
     public function getEndCommentPrefix(): string
     {
         $prefix = $this->getCharset()[2];
@@ -42,10 +36,6 @@ class BoxDrawings
         return $prefix;
     }
 
-    /**
-     * @param int $length
-     * @return void
-     */
     public function blockChanged(int $length): void
     {
         $this->length = $length;
@@ -55,9 +45,6 @@ class BoxDrawings
         }
     }
 
-    /**
-     * @return array
-     */
     private function getCharset(): array
     {
         return self::CHARSETS[$this->charsetIndex];

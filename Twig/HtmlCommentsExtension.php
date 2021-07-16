@@ -29,11 +29,6 @@ class HtmlCommentsExtension extends AbstractExtension
     /** @var BoxDrawings */
     private $boxDrawings;
 
-    /**
-     * @param RequestStack          $requestStack
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param BoxDrawings           $boxDrawings
-     */
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
@@ -44,9 +39,6 @@ class HtmlCommentsExtension extends AbstractExtension
         $this->boxDrawings = $boxDrawings;
     }
 
-    /**
-     * @param NodeReference $ref
-     */
     public function start(NodeReference $ref): void
     {
         if (!$this->isEnabled($ref)) {
@@ -55,9 +47,6 @@ class HtmlCommentsExtension extends AbstractExtension
         ob_start();
     }
 
-    /**
-     * @param NodeReference $ref
-     */
     public function end(NodeReference $ref): void
     {
         if (!$this->isEnabled($ref)) {
@@ -84,10 +73,6 @@ class HtmlCommentsExtension extends AbstractExtension
         echo $content;
     }
 
-    /**
-     * @param NodeReference $ref
-     * @return bool
-     */
     protected function isEnabled(NodeReference $ref): bool
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -99,10 +84,6 @@ class HtmlCommentsExtension extends AbstractExtension
         return '.html.twig' === substr($ref->getTemplate(), -10);
     }
 
-    /**
-     * @param string $string
-     * @return bool
-     */
     protected function isSupported(string $string): bool
     {
         // has HTML tags
@@ -123,10 +104,6 @@ class HtmlCommentsExtension extends AbstractExtension
         return true;
     }
 
-    /**
-     * @param NodeReference $ref
-     * @return string
-     */
     private function getStartComment(NodeReference $ref): string
     {
         $prefix = $this->boxDrawings->getStartCommentPrefix();
@@ -134,10 +111,6 @@ class HtmlCommentsExtension extends AbstractExtension
         return $this->getComment($prefix, $ref);
     }
 
-    /**
-     * @param NodeReference $ref
-     * @return string
-     */
     private function getEndComment(NodeReference $ref): string
     {
         $prefix = $this->boxDrawings->getEndCommentPrefix();
@@ -145,11 +118,6 @@ class HtmlCommentsExtension extends AbstractExtension
         return $this->getComment($prefix, $ref);
     }
 
-    /**
-     * @param string        $prefix
-     * @param NodeReference $ref
-     * @return string
-     */
     protected function getComment(string $prefix, NodeReference $ref): string
     {
         $link = $this->getLink($ref);
@@ -157,10 +125,6 @@ class HtmlCommentsExtension extends AbstractExtension
         return '<!-- '.$prefix.' '.$ref->getName().' ['.$link.'] #'.$ref->getId().'-->';
     }
 
-    /**
-     * @param NodeReference $ref
-     * @return string
-     */
     protected function getLink(NodeReference $ref): string
     {
         return $this->urlGenerator->generate(

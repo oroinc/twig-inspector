@@ -18,9 +18,6 @@ class NodeStart extends Node
         );
     }
 
-    /**
-     * @param Compiler $compiler
-     */
     public function compile(Compiler $compiler)
     {
         $compiler
