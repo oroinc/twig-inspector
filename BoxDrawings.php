@@ -14,11 +14,9 @@ class BoxDrawings
         ['┎', '─', '┖'],
     ];
 
-    /** @var int */
-    private $charsetIndex = 0;
+    private int $charsetIndex = 0;
 
-    /** @var int */
-    private $length = 0;
+    private int $length = 0;
 
     public function getStartCommentPrefix(): string
     {

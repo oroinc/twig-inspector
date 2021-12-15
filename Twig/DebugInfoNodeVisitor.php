@@ -19,18 +19,12 @@ class DebugInfoNodeVisitor extends AbstractNodeVisitor
 {
     protected const EXTENSION_NAME = HtmlCommentsExtension::class;
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function doEnterNode(Node $node, Environment $env)
+    protected function doEnterNode(Node $node, Environment $env): Node
     {
         return $node;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function doLeaveNode(Node $node, Environment $env)
+    protected function doLeaveNode(Node $node, Environment $env): Node
     {
         $varName = $this->getVarName();
         if ($node instanceof ModuleNode) {
@@ -78,18 +72,17 @@ class DebugInfoNodeVisitor extends AbstractNodeVisitor
         return $node;
     }
 
-    /**
-     * @return string
-     */
-    private function getVarName()
+    private function getVarName(): string
     {
         return sprintf('__inspector_%s', hash('sha256', self::EXTENSION_NAME));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getPriority()
+    protected function getReference(Node $node): NodeReference
+    {
+        return new NodeReference($node->getAttribute('name'), $node->getTemplateName(), $node->getTemplateLine());
+    }
+
+    public function getPriority(): int
     {
         return 0;
     }

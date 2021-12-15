@@ -7,17 +7,13 @@ namespace Oro\TwigInspector\Twig;
  */
 class NodeReference
 {
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $template;
+    private string $template;
 
-    /** @var int */
-    private $line;
+    private int $line;
 
-    /** @var string */
-    private $id;
+    private string $id;
 
     public function __construct(string $name, string $template, int $line)
     {

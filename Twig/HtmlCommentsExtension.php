@@ -14,20 +14,15 @@ class HtmlCommentsExtension extends AbstractExtension
 {
     protected const ENABLE_FLAG_COOKIE_ID = 'twig_inspector_is_active';
 
-    /** @var string */
-    private $previousContent;
+    private ?string $previousContent = null;
 
-    /** @var int */
-    private $nestingLevel = 0;
+    private int $nestingLevel = 0;
 
-    /** @var RequestStack */
-    private $requestStack;
+    private RequestStack $requestStack;
 
-    /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    private UrlGeneratorInterface $urlGenerator;
 
-    /** @var BoxDrawings */
-    private $boxDrawings;
+    private BoxDrawings $boxDrawings;
 
     private array $skipBlocks = [];
     private bool $skipped = false;
