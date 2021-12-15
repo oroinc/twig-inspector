@@ -12,18 +12,12 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class OroTwigInspectorExtension extends Extension
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
 
-    /**
-     * {@inheritDoc}
-     */
     public function getAlias(): string
     {
         return 'oro_twig_inspector';

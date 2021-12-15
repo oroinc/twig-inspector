@@ -7,23 +7,14 @@ namespace Oro\TwigInspector\Twig;
  */
 class NodeReference
 {
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $template;
+    private string $template;
 
-    /** @var int */
-    private $line;
+    private int $line;
 
-    /** @var string */
-    private $id;
+    private string $id;
 
-    /**
-     * @param string $name
-     * @param string $template
-     * @param int    $line
-     */
     public function __construct(string $name, string $template, int $line)
     {
         $this->id = uniqid('', false);
@@ -32,33 +23,21 @@ class NodeReference
         $this->line = $line;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getTemplate(): string
     {
         return $this->template;
     }
 
-    /**
-     * @return int
-     */
     public function getLine(): int
     {
         return $this->line;

@@ -10,18 +10,15 @@ use Twig\Node\Node;
  */
 class NodeStart extends Node
 {
-    public function __construct($exensionName, $name, $line, $varName)
+    public function __construct(string $extensionName, string $name, int $line, string $varName)
     {
         parent::__construct(
             [],
-            ['extension_name' => $exensionName, 'name'=> $name, 'line' => $line, 'var_name' => $varName]
+            ['extension_name' => $extensionName, 'name'=> $name, 'line' => $line, 'var_name' => $varName]
         );
     }
 
-    /**
-     * @param Compiler $compiler
-     */
-    public function compile(Compiler $compiler)
+    public function compile(Compiler $compiler): void
     {
         $compiler
             ->write(sprintf('$%s = $this->env->getExtension(', $this->getAttribute('var_name')))

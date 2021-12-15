@@ -10,18 +10,12 @@ use Twig\Node\Node;
  */
 class NodeEnd extends Node
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function __construct($varName)
+    public function __construct(string $varName)
     {
         parent::__construct([], ['var_name' => $varName]);
     }
 
-    /**
-     * @param Compiler $compiler
-     */
-    public function compile(Compiler $compiler)
+    public function compile(Compiler $compiler): void
     {
         $compiler
             ->write("\n")
