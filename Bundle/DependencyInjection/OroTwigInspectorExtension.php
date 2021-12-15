@@ -24,7 +24,7 @@ class OroTwigInspectorExtension extends Extension
     /**
      * {@inheritDoc}
      */
-    public function getAlias()
+    public function getAlias(): string
     {
         return 'oro_twig_inspector';
     }
