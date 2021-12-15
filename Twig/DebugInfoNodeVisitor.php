@@ -24,7 +24,7 @@ class DebugInfoNodeVisitor extends AbstractNodeVisitor
         return $node;
     }
 
-    protected function doLeaveNode(Node $node, Environment $env): ?Node
+    protected function doLeaveNode(Node $node, Environment $env): Node
     {
         $varName = $this->getVarName();
         if ($node instanceof ModuleNode) {
