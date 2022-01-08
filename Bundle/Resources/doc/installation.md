@@ -5,43 +5,39 @@
 ## With Composer
 1. Using composer, install the package as a `dev` dependency:
 ```bash
-php composer require --dev "oro/twig-inspector:1.0.x-dev"
+composer require --dev "oro/twig-inspector:~1.1.0"
 ```
 
-2. Enable the bundle in `AppKernel.php`
+2. Enable the bundle in the `config/bundles.php` file:
 ```php
+# config/bundles.php
 <?php
-// src/AppKernel.php
 
-public function registerBundles()
-{   
-    if ('dev' === $this->getEnvironment()) {
-      //...
-      $bundles[] = new Oro\TwigInspector\Bundle\OroTwigInspectorBundle();
-      //...
-    }
-}
+return [
+    # ...
+    Oro\TwigInspector\Bundle\OroTwigInspectorBundle::class => ['dev' => true]
+];
 ```
 
-3. Add `twig_inspector` firewall to`security.yml`:
+3. Add `twig_inspector` firewall to the `security.yaml` file:
 ```yaml
-# app/config/security.yml
+# config/packages/security.yaml
 security:
     firewalls:
         twig_inspector:
             pattern:   ^/_template/
             security: false
 ```
-4. Import the routing to `routing_dev.yml`:
+4. Create the `twig_inspector.yaml` routing file in the `config/routes/dev`:
 ```yaml
-# config/routing_dev.yml
+# config/routes/dev/twig_inspector.yaml
 oro_twig_inspector:
     resource: "@OroTwigInspectorBundle/Resources/config/oro/routing.yml"
 ```
 
 5. (Optional) Update the [framework.ide](https://symfony.com/doc/current/reference/configuration/framework.html#ide) configuration, for example:
 ```yaml
-# app/config/config_dev.yml
+# config/packages/framework.yaml
 framework:
     ide: phpstorm # to open files in a PhpStorm IDE
 ```
