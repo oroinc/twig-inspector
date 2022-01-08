@@ -9,10 +9,7 @@ use Twig\Extension\AbstractExtension;
  */
 class TwigInspectorExtension extends AbstractExtension
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function getNodeVisitors()
+    public function getNodeVisitors(): array
     {
         return [new DebugInfoNodeVisitor()];
     }

@@ -13,16 +13,10 @@ use Twig\TemplateWrapper;
  */
 class OpenTemplateController
 {
-    /** @var Environment */
-    private $twig;
+    private Environment $twig;
 
-    /** @var FileLinkFormatter */
-    private $fileLinkFormatter;
+    private FileLinkFormatter $fileLinkFormatter;
 
-    /**
-     * @param Environment       $twig
-     * @param FileLinkFormatter $fileLinkFormatter
-     */
     public function __construct(Environment $twig, FileLinkFormatter $fileLinkFormatter)
     {
         $this->twig = $twig;
@@ -30,14 +24,11 @@ class OpenTemplateController
     }
 
     /**
-     * @param Request $request
-     * @param string  $template
-     * @return RedirectResponse
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function __invoke(Request $request, string $template)
+    public function __invoke(Request $request, string $template): RedirectResponse
     {
         $line = $request->query->get('line', 1);
 
