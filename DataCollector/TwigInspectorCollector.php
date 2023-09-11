@@ -28,7 +28,7 @@ class TwigInspectorCollector implements DataCollectorInterface
     /**
      * {@inheritDoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'twig_inspector';
     }
