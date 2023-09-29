@@ -29,18 +29,26 @@ class HtmlCommentsExtension extends AbstractExtension
     /** @var BoxDrawings */
     private $boxDrawings;
 
+    private array $skipBlocks = [];
+    private bool $skipped = false;
+
     public function __construct(
         RequestStack $requestStack,
         UrlGeneratorInterface $urlGenerator,
-        BoxDrawings $boxDrawings
+        BoxDrawings $boxDrawings,
+        array $skipBlocks
     ) {
         $this->requestStack = $requestStack;
         $this->urlGenerator = $urlGenerator;
         $this->boxDrawings = $boxDrawings;
+        $this->skipBlocks = $skipBlocks;
     }
 
     public function start(NodeReference $ref): void
     {
+        if (in_array($ref->getName(), $this->skipBlocks)) {
+            $this->skipped = true;
+        }
         if (!$this->isEnabled($ref)) {
             return;
         }
@@ -49,6 +57,10 @@ class HtmlCommentsExtension extends AbstractExtension
 
     public function end(NodeReference $ref): void
     {
+        if (in_array($ref->getName(), $this->skipBlocks)) {
+            $this->skipped = false;
+            return;
+        }
         if (!$this->isEnabled($ref)) {
             return;
         }
@@ -75,8 +87,10 @@ class HtmlCommentsExtension extends AbstractExtension
 
     protected function isEnabled(NodeReference $ref): bool
     {
+        if ($this->skipped) {
+            return false;
+        }
         $request = $this->requestStack->getCurrentRequest();
-
         if (!$request || !$request->cookies->getBoolean(self::ENABLE_FLAG_COOKIE_ID)) {
             return false;
         }

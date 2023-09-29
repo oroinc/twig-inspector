@@ -16,5 +16,9 @@ class OroTwigInspectorExtension extends Extension
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $config = $this->processConfiguration($this->getConfiguration($configs, $container), $configs);
+        $container->findDefinition('oro_twig_inspector.twig.html_comments_extension')
+            ->replaceArgument(3, $config['skip_blocks']);
     }
 }

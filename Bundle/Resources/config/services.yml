@@ -23,6 +23,7 @@ services:
             - '@request_stack'
             - '@router'
             - '@oro_twig_inspector.box_drawings'
+            - !abstract '$skip_blocks defined in Oro\TwigInspector\Bundle\DependencyInjection\OroTwigInspectorExtension'
         tags:
             - { name: twig.extension }
 
