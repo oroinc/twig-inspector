@@ -4,7 +4,7 @@ namespace Oro\TwigInspector\Controller;
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Debug\FileLinkFormatter;
+use Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter;
 use Twig\Environment;
 use Twig\TemplateWrapper;
 
