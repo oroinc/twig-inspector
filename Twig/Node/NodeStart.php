@@ -14,7 +14,7 @@ class NodeStart extends Node
     {
         parent::__construct(
             [],
-            ['extension_name' => $extensionName, 'name'=> $name, 'line' => $line, 'var_name' => $varName]
+            ['extension_name' => $extensionName, 'name' => $name, 'line' => $line, 'var_name' => $varName]
         );
     }
 
