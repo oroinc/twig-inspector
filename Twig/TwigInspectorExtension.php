@@ -9,6 +9,7 @@ use Twig\Extension\AbstractExtension;
  */
 class TwigInspectorExtension extends AbstractExtension
 {
+    #[\Override]
     public function getNodeVisitors(): array
     {
         return [new DebugInfoNodeVisitor()];

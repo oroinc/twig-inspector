@@ -11,17 +11,17 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
  */
 class TwigInspectorCollector implements DataCollectorInterface
 {
+    #[\Override]
     public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
     }
 
+    #[\Override]
     public function reset(): void
     {
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    #[\Override]
     public function getName(): string
     {
         return 'twig_inspector';

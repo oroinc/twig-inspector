@@ -18,6 +18,7 @@ class NodeStart extends Node
         );
     }
 
+    #[\Override]
     public function compile(Compiler $compiler): void
     {
         $compiler

@@ -19,11 +19,13 @@ class DebugInfoNodeVisitor extends AbstractNodeVisitor
 {
     protected const EXTENSION_NAME = HtmlCommentsExtension::class;
 
+    #[\Override]
     protected function doEnterNode(Node $node, Environment $env): Node
     {
         return $node;
     }
 
+    #[\Override]
     protected function doLeaveNode(Node $node, Environment $env): Node
     {
         $varName = $this->getVarName();
@@ -82,6 +84,7 @@ class DebugInfoNodeVisitor extends AbstractNodeVisitor
         return new NodeReference($node->getAttribute('name'), $node->getTemplateName(), $node->getTemplateLine());
     }
 
+    #[\Override]
     public function getPriority(): int
     {
         return 0;

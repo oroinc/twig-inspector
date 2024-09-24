@@ -9,9 +9,7 @@ class Configuration implements ConfigurationInterface
 {
     public const ROOT_NODE_NAME = 'oro_twig_inspector';
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\Override]
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(self::ROOT_NODE_NAME);
