@@ -2,12 +2,14 @@
 
 namespace Oro\TwigInspector\Twig\Node;
 
+use Twig\Attribute\YieldReady;
 use Twig\Compiler;
 use Twig\Node\Node;
 
 /**
  * Modify generated Twig template to call the `start` method of HtmlCommentsExtension extension
  */
+#[YieldReady]
 class NodeStart extends Node
 {
     public function __construct(string $extensionName, string $name, int $line, string $varName)
