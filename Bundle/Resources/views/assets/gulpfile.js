@@ -1,16 +1,20 @@
-/* eslint no-var: off */
-var gulp = require('gulp');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var csso = require('gulp-csso');
-gulp.task('default', function() {
-    gulp.src('src/index.js')
+import gulp from 'gulp';
+import uglify from 'gulp-uglify';
+import rename from 'gulp-rename';
+import csso from 'gulp-csso';
+
+function scripts() {
+    return gulp.src('src/index.js')
         .pipe(uglify())
         .pipe(rename('index.min.js'))
         .pipe(gulp.dest('./dist'));
+}
 
-    gulp.src('src/style.css')
+function styles() {
+    return gulp.src('src/style.css')
         .pipe(csso())
         .pipe(rename('style.min.css'))
         .pipe(gulp.dest('./dist'));
-});
+}
+
+export default gulp.parallel(scripts, styles);

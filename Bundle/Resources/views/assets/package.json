@@ -1,7 +1,11 @@
 {
   "private": true,
+  "type": "module",
+  "scripts": {
+    "gulp": "gulp"
+  },
   "devDependencies": {
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.2",
     "gulp-csso": "latest",
     "gulp-rename": "latest",
     "gulp-uglify": "latest"
