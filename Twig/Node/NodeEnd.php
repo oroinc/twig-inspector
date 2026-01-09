@@ -26,7 +26,7 @@ class NodeEnd extends Node
                 sprintf(
                     "\$%s->end(\$%s);\n\n",
                     $this->getAttribute('var_name'),
-                    $this->getAttribute('var_name').'_ref'
+                    $this->getAttribute('var_name') . '_ref'
                 )
             );
     }

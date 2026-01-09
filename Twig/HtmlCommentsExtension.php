@@ -73,7 +73,7 @@ class HtmlCommentsExtension extends AbstractExtension
                 $this->boxDrawings->blockChanged($this->nestingLevel);
             }
 
-            $content = $this->getStartComment($ref).$content.$this->getEndComment($ref);
+            $content = $this->getStartComment($ref) . $content . $this->getEndComment($ref);
 
             $this->previousContent = $content;
         }
@@ -131,7 +131,7 @@ class HtmlCommentsExtension extends AbstractExtension
     {
         $link = $this->getLink($ref);
 
-        return '<!-- '.$prefix.' '.$ref->getName().' ['.$link.'] #'.$ref->getId().'-->';
+        return '<!-- ' . $prefix . ' ' . $ref->getName() . ' [' . $link . '] #' . $ref->getId() . '-->';
     }
 
     protected function getLink(NodeReference $ref): string

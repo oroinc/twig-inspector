@@ -31,7 +31,7 @@ class NodeStart extends Node
                 sprintf(
                     '$%s->start($%s = new \Oro\TwigInspector\Twig\NodeReference(',
                     $this->getAttribute('var_name'),
-                    $this->getAttribute('var_name').'_ref'
+                    $this->getAttribute('var_name') . '_ref'
                 )
             )
             ->repr($this->getAttribute('name'))
